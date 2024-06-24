@@ -1,0 +1,76 @@
+#body {
+    background-color: #464149;
+}
+
+#canvass {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+
+}
+
+#canvas {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border-style: solid;
+    border-width: 5px;
+    background-color: #bcb7bf;
+}
+
+#nextPieces {
+    position: absolute;
+    left: 190%;
+    border-style: solid;
+    border-width: 5px;
+    background-color: #bcb7bf;
+}
+
+#holdPiece {
+    position: relative;
+    background-color: #bcb7bf;
+    right: 190%;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#gameOverBack {
+    background-color: #dcdade;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border-style: solid;
+    border-width: 5px;
+    margin-top: 100px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 160px;    
+}
+
+#GOtext {
+    position: relative;
+    white-space: nowrap;
+    font-size: 50px;
+    margin-bottom: 150px;
+}
+
+#btn {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 50px;
+    padding-left: 50px;
+    background-color: #353237;
+    text-decoration: none;
+    border-radius: 10px;
+    border-style: none;
+    color: #ecebed;
+}
+
+#btn:hover {
+    background-color: #252226;
+}

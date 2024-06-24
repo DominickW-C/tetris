@@ -1,0 +1,49 @@
+#body {
+    background-color: #464149;
+}
+
+#title {
+    text-align: center;
+    margin-top: 50px;
+    color: #b0abb3;
+}
+
+#btns {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    white-space: nowrap;
+    font-size: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#startButton {
+    display: block;
+    background-color: #b0abb3;
+    text-decoration: none;
+    color: #464149;
+    padding: 100px;
+    margin-top: 25%;
+    border-radius: 20px;
+}
+
+#aboutButton { 
+    display: block;
+    margin-top: 40px;
+    background-color: #b0abb3;
+    color: #464149;
+    padding: 100px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+#startButton:hover {
+    background-color: #8f8895;
+    color: #39353c;
+}
+
+#aboutButton:hover {
+    background-color: #8f8895;
+    color: #39353c;
+}

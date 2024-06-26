@@ -63,7 +63,6 @@ export function isTouchingPiece () {
     }
     return false;
 }
-
 //helper funtion to isFullLine
 function checkLine (yVal) {
     let totalBlocks = 0;
@@ -88,7 +87,7 @@ function redraw(redrawCords) {
 //based on how many lines are cleared, moves the remaining block down that many times
 //need to only move the ones above the cleared line
 function moveCollisionDown(linesCleared, highestLine) {
-    let moveY = 40 * linesCleared;
+let moveY = 40 * linesCleared;
     for (let blockCords = 0; blockCords < pieces.XYcords.length; blockCords ++) {
         //less than even though it is looking for higher blocks since bigger y means lower
         if (pieces.XYcords[blockCords][1] < highestLine) {
@@ -102,7 +101,7 @@ function moveCollisionDown(linesCleared, highestLine) {
 
 //checks for a completed line
 export function isFullLine () {
-    let totalCleared = 0;
+let totalCleared = 0;
     let highestLine = 0;
     for (let yy = 760; yy >= 0; yy -= 40) {
         if (checkLine(yy) == true) {

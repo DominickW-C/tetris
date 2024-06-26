@@ -12,6 +12,11 @@ let rotationIndex = 0;
 let alreadyHold = false;
 export let pieceIndex = Math.floor(Math.random() * 7);
 export let currentKey = "";
+export let upcomingPiece = [
+    Math.floor(Math.random() * 7),
+    Math.floor(Math.random() * 7),
+    Math.floor(Math.random() * 7)
+];
 
 //array containing all the pieces
 export const pieceArray = [
@@ -24,6 +29,7 @@ export const pieceArray = [
     rotate.squareRotations
 ];
 
+pieces.drawUpcoming();
 pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
 
 //reads key presses and moves the piece
@@ -136,8 +142,11 @@ export function resetPiece (condition) {
             currentY = -40;
             currentX = 160;
             rotationIndex = 0;
-            pieceIndex = Math.floor(Math.random() * 7);
+            pieceIndex = upcomingPiece[0];
+            upcomingPiece.splice(0, 1);
+            upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
+            pieces.drawUpcoming();
         }
     }
     //if a quick drop happens calls this so a duplicate check doesn't happen
@@ -150,8 +159,11 @@ export function resetPiece (condition) {
             currentY = -40;
             currentX = 160;
             rotationIndex = 0;
-            pieceIndex = Math.floor(Math.random() * 7);
+            pieceIndex = upcomingPiece[0];
+            upcomingPiece.splice(0, 1);
+            upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
+            pieces.drawUpcoming();
         }
         resetCondition = "c"
     }
@@ -166,7 +178,10 @@ export function resetPiece (condition) {
         currentX = 160;
         rotationIndex = 0;
         if (pieces.holdIndex == -1) {
-            pieceIndex = Math.floor(Math.random() * 7);
+            pieceIndex = upcomingPiece[0];
+            upcomingPiece.splice(0, 1);
+            upcomingPiece.push(Math.floor(Math.random() * 7));
+            pieces.drawUpcoming();
         } else {
             pieceIndex = pieces.holdIndex;
         }

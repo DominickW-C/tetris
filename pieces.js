@@ -1,4 +1,4 @@
-import { resetPiece } from "./main.js";
+import { resetPiece, upcomingPiece } from "./main.js";
 
 //init canvas
 let canvas = document.getElementById("canvas");
@@ -6,6 +6,9 @@ let context = canvas.getContext("2d");
 
 let holdCanvas = document.getElementById("holdPiece");
 let holdContext = holdCanvas.getContext("2d");
+
+let nextPiecesCanvas = document.getElementById("nextPieces");
+let nextPiecesContext = nextPiecesCanvas.getContext("2d");
 
 let currentContext = context;
 
@@ -40,44 +43,64 @@ export function removeFromCords(yVal) {
     }
 }
 
-//logic for holding pieces 
 let storeIndex = -1;
 export let holdIndex = storeIndex;
+//helper function to both hold piece and draw upcoming
+function drawWhich (whichPiece, ifHold, yValue) {
+    let saveStore = storeIndex;
+    currentContext.lineWidth = 3;
+    if (whichPiece == 0) {
+        tBlock1(60, yValue, "create");
+        storeIndex = 0;
+    }
+    else if (whichPiece == 1) {
+        line1(40, yValue - 10, "create");
+        storeIndex = 1;
+    }
+    else if (whichPiece == 2) {
+        lBlock1(60, yValue, "create");
+        storeIndex = 2;
+    }
+    else if (whichPiece == 3) {
+        backL1(60, yValue, "create");
+        storeIndex = 3;
+    }
+    else if (whichPiece == 4) {
+        zigzag1(60, yValue, "create");
+        storeIndex = 4;
+    } 
+    else if (whichPiece == 5) {
+        backZigzag1(60, yValue, "create");
+        storeIndex = 5;
+    } else {
+        square(40, yValue - 30, "create");
+        storeIndex = 6;
+    }
+
+    if (ifHold == false) {
+        storeIndex = saveStore;
+    }
+}
+
+//logic for holding pieces 
 export function holdPiece(whichPiece) {
     holdIndex = storeIndex; 
     currentContext = holdContext;
     currentContext.clearRect(0, 0, 160, 160);
-    currentContext.lineWidth = 3;
-
-    if (whichPiece == 0) {
-        tBlock1(60, 70, "create");
-        storeIndex = 0;
-    }
-    else if (whichPiece == 1) {
-        line1(40, 60, "create");
-        storeIndex = 1;
-    }
-    else if (whichPiece == 2) {
-        lBlock1(60, 70, "create");
-        storeIndex = 2;
-    }
-    else if (whichPiece == 3) {
-        backL1(60, 70, "create");
-        storeIndex = 3;
-    }
-    else if (whichPiece == 4) {
-        zigzag1(60, 70, "create");
-        storeIndex = 4;
-    } 
-    else if (whichPiece == 5) {
-        backZigzag1(60, 70, "create");
-        storeIndex = 5;
-    } else {
-        square(40, 40, "create");
-        storeIndex = 6;
-    }
+    drawWhich(whichPiece, true, 70);
     currentContext = context;
     resetPiece("d");
+}
+
+export function drawUpcoming(upcomingArray) {
+    currentContext = nextPiecesContext;
+    currentContext.clearRect(0, 0, 160, 520);
+    let yy = 70;
+    for (let index = 0; index < upcomingPiece.length; index ++) {
+        drawWhich(upcomingPiece[index], false, yy);
+        yy += 160;
+    }
+    currentContext = context;
 }
 
 //creates a single block / update block

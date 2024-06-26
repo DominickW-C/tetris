@@ -6,3 +6,5 @@ A few things I've learned from this project:
     - bug fixing, there was a lot more bugs that I had to fix compared to any other project I have done
     - modular javascript programming
     - collision detection, the collision detection in this game is a lot momre complicated than that in pong
+
+CURRENT NOT FINISHED, CHECK TO DO FOR CURRENT KNOWN BUGS AND WHAT FEATURES I NEED TO DO NEXT

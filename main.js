@@ -165,10 +165,10 @@ export function resetPiece (condition) {
             alreadyHold = false;
             pieces.drawUpcoming();
         }
-        resetCondition = "c"
+        resetCondition = "c";
     }
     else if (condition == "c") {
-        resetCondition = "a"
+        resetCondition = "a";
     }
     //resets if you hold a piece
     else if (condition == "d") {

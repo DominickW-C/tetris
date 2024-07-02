@@ -81,37 +81,37 @@ function checkLine (yVal) {
 //redraws the shape down, called in move collision down
 function redraw(redrawCords) {
     let block = new pieces.block(redrawCords[2], redrawCords[0], redrawCords[1]);
-    block.drawBlock();
+    block.drawBlockAgain();
 }
 
 //based on how many lines are cleared, moves the remaining block down that many times
 //need to only move the ones above the cleared line
-function moveCollisionDown(linesCleared, highestLine) {
-let moveY = 40 * linesCleared;
-    for (let blockCords = 0; blockCords < pieces.XYcords.length; blockCords ++) {
-        //less than even though it is looking for higher blocks since bigger y means lower
-        if (pieces.XYcords[blockCords][1] < highestLine) {
-            let clear = new pieces.block("black", pieces.XYcords[blockCords][0], pieces.XYcords[blockCords][1]);
-            clear.clearBlock();
-            pieces.XYcords[blockCords][1] += moveY; 
-            redraw(pieces.XYcords[blockCords]);
+function moveCollisionDown(highestLine) {
+    for (let index = 0; index < pieces.XYcords.length; index ++) {
+        if (pieces.XYcords[index][1] < highestLine) {
+            let clearBlock = new pieces.block(pieces.XYcords[index][2], pieces.XYcords[index][0], pieces.XYcords[index][1]);
+            clearBlock.clearBlock();
+            pieces.XYcords[index][1] += 40;
         }
     }
 }
 
 //checks for a completed line
 export function isFullLine () {
-let totalCleared = 0;
-    let highestLine = 0;
+    let linesCleared = [];
     for (let yy = 760; yy >= 0; yy -= 40) {
         if (checkLine(yy) == true) {
-            highestLine = yy;
-            totalCleared ++;
+            linesCleared.push(yy);
             pieces.clearRow(yy);
             pieces.removeFromCords(yy);
+            moveCollisionDown(yy);
+            isFullLine();
         }
     }
-    moveCollisionDown(totalCleared, highestLine);
+    for (let index = 0; index < pieces.XYcords.length; index ++) {
+        redraw(pieces.XYcords[index]);
+    }
+    pieces.removeDupes();
 }
 
 //checks for a game over whenever a block is placed

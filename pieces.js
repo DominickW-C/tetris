@@ -124,12 +124,6 @@ export class block {
         this.cords();
     }
 
-    drawBlockAgain () {
-        currentContext.fillStyle = this.color;
-        currentContext.fillRect(this.currentX, this.currentY, 40, 40);
-        currentContext.strokeRect(this.currentX + 2, this.currentY + 2, 36, 36);
-    }
-
     clearBlock () {
         currentContext.clearRect(this.currentX, this.currentY, 40 , 40);
         currentXY = [];

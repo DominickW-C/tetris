@@ -78,14 +78,13 @@ function checkLine (yVal) {
     return false;
 }
 
-//redraws the shape down, called in move collision down
+//redraws the shape down
 function redraw(redrawCords) {
     let block = new pieces.block(redrawCords[2], redrawCords[0], redrawCords[1]);
-    block.drawBlockAgain();
+    block.drawBlock();
 }
 
-//based on how many lines are cleared, moves the remaining block down that many times
-//need to only move the ones above the cleared line
+//everytime a line is cleared moves blocks above it down one
 function moveCollisionDown(highestLine) {
     for (let index = 0; index < pieces.XYcords.length; index ++) {
         if (pieces.XYcords[index][1] < highestLine) {

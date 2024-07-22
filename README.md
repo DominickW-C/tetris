@@ -10,4 +10,7 @@ A few things I've learned from this project:
 
 one of the things I really like about this project is how I made the objects for blocks. it was very organized and making each block seperate made clearing lines and creating shapes super easy.
 
+scoring goes by the NES version of the game, with currently no extra points for hard dropping and soft dropping.
+may or may not add in the future.
+
 CURRENTLY NOT FINISHED, CHECK TO DO FOR CURRENT KNOWN BUGS AND WHAT FEATURES I NEED TO DO NEXT

@@ -10,6 +10,7 @@ let condition = "create";
 let level = 250;
 let rotationIndex = 0;
 let alreadyHold = false;
+export let shadow = [false];
 export let pieceIndex = Math.floor(Math.random() * 7);
 export let currentKey = "";
 export let upcomingPiece = [
@@ -31,6 +32,12 @@ export const pieceArray = [
 
 pieces.drawUpcoming();
 pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+//stops square shadoow from being drawn in the ground
+if (pieceIndex == 6) {
+    drawShadow(720, true);
+} else {
+    drawShadow(760, true);
+}
 
 //reads key presses and moves the piece
 function keyPress(keyEvent) {
@@ -39,21 +46,26 @@ function keyPress(keyEvent) {
     if (key == "ArrowLeft") {
         currentKey = key;
         if (collision.isTouchingWallOrPiece() == false) {
+            drawShadow(0, false);
             clearPrev();
             currentX -= 40;
             pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+            drawShadow(0, true);
         }
     }
     if (key == "ArrowRight") {
         currentKey = key;
         if (collision.isTouchingWallOrPiece() == false) {
+            drawShadow(0, false);
             clearPrev();
             currentX += 40;
             pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+            drawShadow(0, true);
         }
     }
 
     if (key == "ArrowUp") {
+        drawShadow(0, false);
         clearPrev();
         //makes sure it does not go off the screen on the sides when rotating
         if (currentX == 0) {
@@ -69,9 +81,9 @@ function keyPress(keyEvent) {
             rotationIndex = 0;
         }
         pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+        drawShadow(0, true);
     }
 
-    //debugging only
     if (key == "ArrowDown") {
         level = 25;
     }
@@ -83,6 +95,7 @@ function keyPress(keyEvent) {
 
     if (key == "c") {
         if (alreadyHold == false) {
+            drawShadow(0, false);
             pieces.holdPiece(pieceIndex);
             alreadyHold = true;
         } else {
@@ -99,11 +112,12 @@ document.addEventListener("keyup", (event) => {
 });
 
 //logic behind a quickdrop
+//POSSIBILITY OF COMBINING QUICK DROP AND SHAWDOW
 let resetCondition = "a";
-export function quickDrop () {
+function quickDrop () {
     pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
     for (let yCordIndex = 0; yCordIndex < pieces.currentXY.length; yCordIndex ++) {
-        if (collision.isTouchingbottom() == false && collision.isTouchingPiece() == false) {
+        if (collision.isTouchingbottom(0) == false && collision.isTouchingPiece(0) == false) {
             clearPrev();
             return quickDrop(currentY += 40);
         }
@@ -113,15 +127,36 @@ export function quickDrop () {
     return resetPiece(resetCondition);
 }
 
+export function drawShadow (moveDownY, draw) {
+    
+    if (draw == true) {
+        condition = "create";
+    } else {
+        condition = "clear";
+    }
+    shadow[0] = true;
+    pieces.transparency[0] = "33";
+    for (let yCordIndex = 0; yCordIndex < pieces.currentXY.length; yCordIndex ++) {
+        if (collision.isTouchingbottom(moveDownY) == false && collision.isTouchingPiece(moveDownY) == false) {
+            return drawShadow(moveDownY + 40, draw);
+        }
+    }
+    pieceArray[pieceIndex][rotationIndex](currentX, currentY + moveDownY, condition);
+    shadow[0] = false;
+    pieces.transparency[0] = "FF";
+}
+
+
 //clears the past block
 function clearPrev () {
     condition = "clear";
     pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+    pieceArray[pieceIndex][rotationIndex](currentX, currentY + shadow, condition);
     condition = "create";
 }
 
 //appends the array of places pieces
-function XYappend () {
+function XYappend () { 
     for (let xy = 0; xy < pieces.currentXY.length; xy ++) {
         pieces.XYcords.push([pieces.currentXY[xy][0], pieces.currentXY[xy][1], pieces.currentColor[xy]]);
     }
@@ -131,10 +166,11 @@ function XYappend () {
 //will also call a function to see if a line needs clearing,
 //remove duplicate blocks (drawing shapes sometimes has overlap)
 //check for a game over
+let res = false; 
 export function resetPiece (condition) {
     //regular check
     if (condition == "a") {
-        if (collision.isTouchingbottom() == true || collision.isTouchingPiece() == true) {
+        if (collision.isTouchingbottom(0) == true || collision.isTouchingPiece(0) == true) {
             XYappend();
             pieces.removeDupes();
             collision.isFullLine();  
@@ -146,12 +182,12 @@ export function resetPiece (condition) {
             upcomingPiece.splice(0, 1);
             upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
-            pieces.drawUpcoming();
+            res = true; 
         }
     }
     //if a quick drop happens calls this so a duplicate check doesn't happen
     else if (condition == "b") {
-        if (collision.isTouchingbottom() == true || collision.isTouchingPiece() == true) {
+        if (collision.isTouchingbottom(0) == true || collision.isTouchingPiece(0) == true) {
             XYappend();
             pieces.removeDupes();
             collision.isFullLine();  
@@ -163,7 +199,7 @@ export function resetPiece (condition) {
             upcomingPiece.splice(0, 1);
             upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
-            pieces.drawUpcoming();
+            res = true;
         }
         resetCondition = "c";
     }
@@ -181,10 +217,17 @@ export function resetPiece (condition) {
             pieceIndex = upcomingPiece[0];
             upcomingPiece.splice(0, 1);
             upcomingPiece.push(Math.floor(Math.random() * 7));
-            pieces.drawUpcoming();
         } else {
             pieceIndex = pieces.holdIndex;
         }
+        res = true;
+    }
+}
+
+function drawAfterReset () {
+    if (res == true) {
+        drawShadow(0, true);
+        res = false
     }
 }
 
@@ -196,6 +239,7 @@ export function update () {
         clearPrev();
         currentY += 40; 
         pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
+        drawAfterReset();
     }, level)
 }
 

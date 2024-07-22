@@ -1,4 +1,4 @@
-import { resetPiece, upcomingPiece } from "./main.js";
+import { resetPiece, upcomingPiece, shadow } from "./main.js";
 
 //init canvas
 let canvas = document.getElementById("canvas");
@@ -121,7 +121,9 @@ export class block {
         currentContext.fillStyle = this.color;
         currentContext.fillRect(this.currentX, this.currentY, 40, 40);
         currentContext.strokeRect(this.currentX + 2, this.currentY + 2, 36, 36);
-        this.cords();
+        if (shadow[0] == false) {
+            this.cords();
+        }
     }
 
     clearBlock () {
@@ -175,10 +177,11 @@ class createShape extends block {
     }
 } 
 
+export var transparency = ["FF"];
 //functions that create a shape
 //tblock rotations
 export function tBlock1 (currentX, currentY, condition) {
-    let origin = new createShape("#b279d7", currentX, currentY);
+    let origin = new createShape(`#b279d7${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -193,7 +196,7 @@ export function tBlock1 (currentX, currentY, condition) {
 } 
 
 export function tBlock2 (currentX, currentY, condition) {
-    let origin = new createShape("#b279d7", currentX, currentY);
+    let origin = new createShape(`#b279d7${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -208,7 +211,7 @@ export function tBlock2 (currentX, currentY, condition) {
 } 
 
 export function tBlock3 (currentX, currentY, condition) {
-    let origin = new createShape("#b279d7", currentX, currentY);
+    let origin = new createShape(`#b279d7${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -223,7 +226,7 @@ export function tBlock3 (currentX, currentY, condition) {
 }
 
 export function tBlock4 (currentX, currentY, condition) {
-    let origin = new createShape("#b279d7", currentX, currentY);
+    let origin = new createShape(`#b279d7${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -238,7 +241,7 @@ export function tBlock4 (currentX, currentY, condition) {
 }
 
 export function line1 (currentX, currentY, condition) {
-    let origin = new createShape("#4cdfe1", currentX, currentY)
+    let origin = new createShape(`#4cdfe1${transparency[0]}`, currentX, currentY)
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -253,7 +256,7 @@ export function line1 (currentX, currentY, condition) {
 
 //line rotations
 export function line2 (currentX, currentY, condition) {
-    let origin = new createShape("#4cdfe1", currentX, currentY)
+    let origin = new createShape(`#4cdfe1${transparency[0]}`, currentX, currentY)
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -267,7 +270,7 @@ export function line2 (currentX, currentY, condition) {
 
 //zigzag rotations
 export function zigzag1 (currentX, currentY, condition) {
-let origin = new createShape("#ff243a", currentX, currentY);
+let origin = new createShape(`#ff243a${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -281,7 +284,7 @@ let origin = new createShape("#ff243a", currentX, currentY);
 }
 
 export function zigzag2 (currentX, currentY, condition) {
-    let origin = new createShape("#ff243a", currentX, currentY);
+    let origin = new createShape(`#ff243a${transparency[0]}`, currentX, currentY);
         if (condition == "create") {
             origin.drawBlock();
         }
@@ -295,7 +298,7 @@ export function zigzag2 (currentX, currentY, condition) {
 }
 
 export function zigzag3 (currentX, currentY, condition) {
-    let origin = new createShape("#ff243a", currentX, currentY);
+    let origin = new createShape(`#ff243a${transparency[0]}`, currentX, currentY);
         if (condition == "create") {
             origin.drawBlock();
         }
@@ -309,7 +312,7 @@ export function zigzag3 (currentX, currentY, condition) {
 }
 
 export function zigzag4 (currentX, currentY, condition) {
-    let origin = new createShape("#ff243a", currentX, currentY);
+    let origin = new createShape(`#ff243a${transparency[0]}`, currentX, currentY);
         if (condition == "create") {
             origin.drawBlock();
         }
@@ -325,7 +328,7 @@ export function zigzag4 (currentX, currentY, condition) {
 
 //back zigzg rotations
 export function backZigzag1 (currentX, currentY, condition) {
-    let origin = new createShape("#42f542", currentX, currentY);
+    let origin = new createShape(`#42f542${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -339,7 +342,7 @@ export function backZigzag1 (currentX, currentY, condition) {
 }
 
 export function backZigzag2 (currentX, currentY, condition) {
-    let origin = new createShape("#42f542", currentX, currentY);
+    let origin = new createShape(`#42f542${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -353,7 +356,7 @@ export function backZigzag2 (currentX, currentY, condition) {
 }
 
 export function backZigzag3 (currentX, currentY, condition) {
-    let origin = new createShape("#42f542", currentX, currentY);
+    let origin = new createShape(`#42f542${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -367,7 +370,7 @@ export function backZigzag3 (currentX, currentY, condition) {
 }
 
 export function backZigzag4 (currentX, currentY, condition) {
-    let origin = new createShape("#42f542", currentX, currentY);
+    let origin = new createShape(`#42f542${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -382,7 +385,7 @@ export function backZigzag4 (currentX, currentY, condition) {
 
 //l block rotations
 export function lBlock1 (currentX, currentY, condition) {
-    let origin = new createShape("#ffb629", currentX, currentY);
+    let origin = new createShape(`#ffb629${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -396,7 +399,7 @@ export function lBlock1 (currentX, currentY, condition) {
 }
 
 export function lBlock2 (currentX, currentY, condition) {
-    let origin = new createShape("#ffb629", currentX, currentY);
+    let origin = new createShape(`#ffb629${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -410,7 +413,7 @@ export function lBlock2 (currentX, currentY, condition) {
 }
 
 export function lBlock3 (currentX, currentY, condition) {
-    let origin = new createShape("#ffb629", currentX, currentY);
+    let origin = new createShape(`#ffb629${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -425,7 +428,7 @@ export function lBlock3 (currentX, currentY, condition) {
 }
 
 export function lBlock4 (currentX, currentY, condition) {
-    let origin = new createShape("#ffb629", currentX, currentY);
+    let origin = new createShape(`#ffb629${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -440,7 +443,7 @@ export function lBlock4 (currentX, currentY, condition) {
 
 //back l block rotations
 export function backL1 (currentX, currentY, condition) {
-    let origin = new createShape("#2c30c9", currentX, currentY);
+    let origin = new createShape(`#2c30c9${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -455,7 +458,7 @@ export function backL1 (currentX, currentY, condition) {
 }
 
 export function backL2 (currentX, currentY, condition) {
-    let origin = new createShape("#2c30c9", currentX, currentY);
+    let origin = new createShape(`#2c30c9${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -470,7 +473,7 @@ export function backL2 (currentX, currentY, condition) {
 }
 
 export function backL3 (currentX, currentY, condition) {
-    let origin = new createShape("#2c30c9", currentX, currentY);
+    let origin = new createShape(`#2c30c9${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -484,7 +487,7 @@ export function backL3 (currentX, currentY, condition) {
 }
 
 export function backL4 (currentX, currentY, condition) {
-    let origin = new createShape("#2c30c9", currentX, currentY);
+    let origin = new createShape(`#2c30c9${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }
@@ -499,7 +502,7 @@ export function backL4 (currentX, currentY, condition) {
 
 //square rotations (haha so funny)
 export function square (currentX, currentY, condition) {
-    let origin =  new createShape("#f6ff29", currentX, currentY);
+    let origin =  new createShape(`#f6ff29${transparency[0]}`, currentX, currentY);
     if (condition == "create") {
         origin.drawBlock();
     }

@@ -3,6 +3,7 @@ import * as pieces from "./pieces.js";
 import * as main from "./main.js";
 
 //checks to see if piece is touching the wall or another piece
+//returns conditional
 export function isTouchingWallOrPiece() {
     for (let xx = 0; xx < pieces.currentXY.length; xx ++) {
         //checks if touching wall
@@ -28,9 +29,10 @@ export function isTouchingWallOrPiece() {
     return false;
 }
 
-export function isTouchingbottom() {
+//returns conditional
+export function isTouchingbottom(YDifference) {
     for (let yy = 0; yy < pieces.currentXY.length; yy ++) {
-        if (pieces.currentXY[yy][1] == 760) {
+        if (pieces.currentXY[yy][1] + YDifference == 760) {
             return true;
         }
     }
@@ -39,31 +41,38 @@ export function isTouchingbottom() {
 
 //compares the cords together, if x != returns false, if true then checks y
 //helper function to isTouchingPiece
-function compareCords(list1, list2) {
+//returns conditional 
+function compareCords(list1, list2, moveDownY) {
     let yCompare = 0;
+    let yy = 0
     for (let com =  0; com < list1.length; com ++) {
-        if ((list1[com]) != (list2[com] - yCompare)) {
+        if ((list1[com] + yy) != (list2[com] - yCompare)) {
             return false;   
         }
         yCompare += 40;
+        yy += moveDownY;
+
     } 
     return true
 }
 
 //goes through the list of cords to see if any of the places pieces are matching with the current piece
-export function isTouchingPiece () {
+//returns conditonal
+export function isTouchingPiece (moveDownY) {
     //loops through current pieces block cords
     for (let curVar = 0; curVar < pieces.currentXY.length; curVar ++) {
         //loops through the placed pieces block cords
         for (let totalVar = 0; totalVar < pieces.XYcords.length; totalVar ++) {      
-            if (compareCords(pieces.currentXY[curVar], pieces.XYcords[totalVar]) == true) {
+            if (compareCords(pieces.currentXY[curVar], pieces.XYcords[totalVar], moveDownY) == true) {
                 return true;
             }
         }
     }
     return false;
 }
+
 //helper funtion to isFullLine
+//returns conditional
 function checkLine (yVal) {
     let totalBlocks = 0;
     for (let blockCords = 0; blockCords < pieces.XYcords.length; blockCords ++) {

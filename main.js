@@ -182,6 +182,7 @@ export function resetPiece (condition) {
             upcomingPiece.splice(0, 1);
             upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
+            pieces.drawUpcoming();
             res = true; 
         }
     }
@@ -199,6 +200,7 @@ export function resetPiece (condition) {
             upcomingPiece.splice(0, 1);
             upcomingPiece.push(Math.floor(Math.random() * 7));
             alreadyHold = false;
+            pieces.drawUpcoming();
             res = true;
         }
         resetCondition = "c";
@@ -220,6 +222,7 @@ export function resetPiece (condition) {
         } else {
             pieceIndex = pieces.holdIndex;
         }
+        pieces.drawUpcoming();
         res = true;
     }
 }

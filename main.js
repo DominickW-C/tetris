@@ -2,6 +2,7 @@
 import * as pieces from "./pieces.js";
 import * as collision from "./collision.js";
 import * as rotate from "./rotatePiece.js";
+import * as score from "./scoreLevel.js";
 
 //starting variables
 let currentX = 160;
@@ -91,6 +92,7 @@ function keyPress(keyEvent) {
     if (key == " ") {
         clearPrev(); 
         quickDrop();
+        score.addScore("quickDrop");
     }
 
     if (key == "c") {
@@ -127,8 +129,8 @@ function quickDrop () {
     return resetPiece(resetCondition);
 }
 
+//logic behind drawing a shadow piece (where to start checkiing, if it is drawing or erasing)
 export function drawShadow (moveDownY, draw) {
-    
     if (draw == true) {
         condition = "create";
     } else {
@@ -145,7 +147,6 @@ export function drawShadow (moveDownY, draw) {
     shadow[0] = false;
     pieces.transparency[0] = "FF";
 }
-
 
 //clears the past block
 function clearPrev () {
@@ -243,6 +244,7 @@ export function update () {
         currentY += 40; 
         pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
         drawAfterReset();
+        score.updateScoreLevel();
     }, level)
 }
 

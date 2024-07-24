@@ -1,6 +1,7 @@
 //import functions
 import * as pieces from "./pieces.js";
 import * as main from "./main.js";
+import * as score from "./scoreLevel.js";
 
 //checks to see if piece is touching the wall or another piece
 //returns conditional
@@ -104,11 +105,14 @@ function moveCollisionDown(highestLine) {
     }
 }
 
+let totalCleared = 0; 
+
 //checks for a completed line
 export function isFullLine () {
     let linesCleared = [];
     for (let yy = 760; yy >= 0; yy -= 40) {
         if (checkLine(yy) == true) {
+            totalCleared ++;
             linesCleared.push(yy);
             pieces.clearRow(yy);
             pieces.removeFromCords(yy);
@@ -116,10 +120,17 @@ export function isFullLine () {
             isFullLine();
         }
     }
+
+    //updates the score based on how many lines are cleared
+    if (totalCleared != 0) {
+        score.addScore(totalCleared);
+    }
+
     for (let index = 0; index < pieces.XYcords.length; index ++) {
         redraw(pieces.XYcords[index]);
     }
     pieces.removeDupes();
+    totalCleared = 0;
 }
 
 //checks for a game over whenever a block is placed

@@ -2,7 +2,7 @@
     background-color: #464149;
 }
 
-#canvass {
+#canvases {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
@@ -30,6 +30,24 @@
     position: relative;
     background-color: #bcb7bf;
     right: 190%;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#score {
+    position: absolute;
+    background-color: #bcb7bf;
+    right: 190%;
+    top: 200px;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#level {
+    position: absolute;
+    background-color: #bcb7bf;
+    right: 190%;
+    top: 320px;
     border-style: solid;
     border-width: 5px;
 }

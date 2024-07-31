@@ -5,10 +5,12 @@ import * as rotate from "./rotatePiece.js";
 import * as score from "./scoreLevel.js";
 
 //starting variables
+let storeLevelForSoftDrop = 800;
 let currentX = 160;
 let currentY = 0;
 let condition = "create";
-let level = 250;
+export let totalLinesCleared = [0];
+let level = 800;
 let rotationIndex = 0;
 let alreadyHold = false;
 export let shadow = [false];
@@ -109,7 +111,7 @@ function keyPress(keyEvent) {
 document.addEventListener("keydown", keyPress);
 document.addEventListener("keyup", (event) => {
     if (event["key"] == "ArrowDown") {
-        level = 250;
+        level = storeLevelForSoftDrop;
     }
 });
 
@@ -235,6 +237,79 @@ function drawAfterReset () {
     }
 }
 
+//sees if enough lines were cleared to go up a level 
+function checklevelUpdate(totalLinesCleared) {
+    switch (totalLinesCleared) {
+        case 10:
+            level = 716;
+            storeLevelForSoftDrop = 716;
+            score.displayLevel[0] = 1;
+            break;
+        case 20:
+            level = 633;
+            storeLevelForSoftDrop = 633;
+            score.displayLevel[0] = 2;
+            break;
+        case 30:
+            level = 550;
+            storeLevelForSoftDrop = 550;
+            score.displayLevel[0] = 3;
+            break;
+        case 40:
+            level = 466;
+            storeLevelForSoftDrop = 466;
+            score.displayLevel[0] = 4;
+            break;
+        case 50:
+            level = 383;
+            storeLevelForSoftDrop = 383;
+            score.displayLevel[0] = 5;
+            break;
+        case 60:
+            level = 300;
+            storeLevelForSoftDrop = 300;
+            score.displayLevel[0] = 6;
+            break;
+        case 70:
+            level = 216;
+            storeLevelForSoftDrop = 216;
+            score.displayLevel[0] = 7;
+            break;
+        case 80:
+            level = 133;
+            storeLevelForSoftDrop = 133;
+            score.displayLevel[0] = 8;
+            break;
+        case 90:
+            level = 100;
+            storeLevelForSoftDrop = 100;
+            score.displayLevel[0] = 9;
+            break;
+        case 100:
+            level = 83;
+            storeLevelForSoftDrop = 83;
+            score.displayLevel[0] = 10;
+            break;
+        case 130:
+            level = 67;
+            storeLevelForSoftDrop = 67;
+            score.displayLevel[0] = 11;
+            break;
+        case 160:
+            level = 50;
+            storeLevelForSoftDrop = 50;
+            score.displayLevel[0] = 12;
+            break;
+        case 190:
+            level = 33;
+            storeLevelForSoftDrop = 33;
+            score.displayLevel[0] = 13;
+            break;
+        default:
+            break;
+    }
+}
+
 //moves the piece down
 export function update () {
     setTimeout(() => {
@@ -245,6 +320,7 @@ export function update () {
         pieceArray[pieceIndex][rotationIndex](currentX, currentY, condition);
         drawAfterReset();
         score.updateScoreLevel();
+        checklevelUpdate(totalLinesCleared[0]);
     }, level)
 }
 

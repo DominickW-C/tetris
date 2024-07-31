@@ -12,12 +12,12 @@ scoreContext.fillText("Score:", 5, 25);
 levelContext.fillText("Level: ", 5, 28);
 
 //write to the screen the parts that will update
-let level = 0;
+export let displayLevel = [0];
 export function updateScoreLevel() {
     scoreContext.clearRect(5, 30, 160, 200);
     levelContext.clearRect(70,0, 200, 60);
     scoreContext.fillText(score, 5, 65);
-    levelContext.fillText (level, 75, 28);
+    levelContext.fillText (displayLevel[0], 75, 28);
 }
 
 //adds to the score based on what happened

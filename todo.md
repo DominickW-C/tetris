@@ -33,9 +33,10 @@ DONE:
 
     - add a ghost piece at the bottom
 
+    - make score and levels work
+
 TODO:
 
-    - make score and levels work
     - make an about me screen
     - add final score to the game over screen
 
@@ -44,6 +45,8 @@ CURRENT BUGS:
     - tspins messes things up and will clip through blocks
     - can rotate pieces through other pieces
     - holding a piece and the moving it too soon will cause the game to crash (maybe because a function gets called without enough parameters)
+    - score maxes out way too fast
+    - not really a bug but when you going to soft drop you have to wait from an update frame which feels a bit weird
 
 save the rotated cords, comapare and if there are overlapping cords then dont rotate
 might cause an issue since whe you draw a block there are overlapping cords

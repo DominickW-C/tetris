@@ -129,6 +129,7 @@ export function isFullLine () {
     for (let index = 0; index < pieces.XYcords.length; index ++) {
         redraw(pieces.XYcords[index]);
     }
+    main.totalLinesCleared[0] += totalCleared;
     pieces.removeDupes();
     totalCleared = 0;
 }

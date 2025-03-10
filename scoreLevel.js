@@ -29,15 +29,15 @@ export function addScore(forWhat) {
         score += 50;
     }
     else if (forWhat == 1) {
-        score += (40 * (level + 1));
+        score += (40 * (displayLevel[0] + 1));
     }
     else if (forWhat == 2) {
-        score += (100 * (level + 1));
+        score += (100 * (displayLevel[0] + 1));
     }
     else if (forWhat == 3) {
-        score += (300 * (level + 1));
+        score += (300 * (displayLevel[0] + 1));
     }
     else if (forWhat == 4) {
-        score += (1200 * (level + 1));
+        score += (1200 * (displayLevel[0] + 1));
     }
 }
